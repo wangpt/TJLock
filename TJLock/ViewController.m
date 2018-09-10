@@ -5,9 +5,7 @@
 //  Created by tao on 2018/9/10.
 //  Copyright © 2018年 tao. All rights reserved.
 //
-/*
- 可以看出要是没有优先级反转的问题的话，osspinlock占有绝对，其次就是dispatch_semaphore，dispatch_semaphore和os_unfair_lock差距很小，其次就是pthread_mutex。其实在测试的时候呢，性能和次数是有关系的，即是说这几种锁在不同的情形下会发挥最好性能，次数量大的时候呢，性能排名就如上面一样。所以在项目中使用的话，就根据项目情况选择即可。
- */
+
 #import "ViewController.h"
 //OSSpinLock
 #import <libkern/OSAtomic.h>
