@@ -16,9 +16,6 @@
 //pthread_mutex
 #import <pthread.h>
 
-//https://www.jianshu.com/p/b1edc6b0937a
-//https://www.jianshu.com/p/7e9dd2cb78a8
-//https://www.jianshu.com/p/5cf73b57796b
 @interface ViewController ()
 
 @end
@@ -69,12 +66,12 @@
     
     {
         //条件锁
-        [self NSCondition:count];
-        [self NSConditionLock:count];
+        [self _NSCondition:count];
+        [self _NSConditionLock:count];
     }
     {
         //递归锁
-        [self nsRecursiveLock:count];
+        [self _NSRecursiveLock:count];
         [self pthread_mutex_recursive:count];
     }
     
@@ -168,7 +165,7 @@
     
 }
 #pragma mark - 条件锁
-- (void)NSCondition:(int)count{
+- (void)_NSCondition:(int)count{
     NSTimeInterval begin, end;
     NSCondition *lock = [NSCondition new];
     begin = CACurrentMediaTime();
@@ -180,7 +177,7 @@
     printf("NSCondition:              %8.2f ms\n", (end - begin) * 1000);
 }
 //(条件锁、对象锁)
-- (void)NSConditionLock:(int)count{
+- (void)_NSConditionLock:(int)count{
     NSTimeInterval begin, end;
     NSConditionLock *lock = [[NSConditionLock alloc] initWithCondition:1];
     begin = CACurrentMediaTime();
@@ -193,8 +190,7 @@
     
 }
 #pragma mark - 递归锁
-//(条件锁、递归锁)
-- (void)nsRecursiveLock:(int)count{
+- (void)_NSRecursiveLock:(int)count{
     NSTimeInterval begin, end;
     NSRecursiveLock *lock = [NSRecursiveLock new];
     begin = CACurrentMediaTime();
@@ -204,7 +200,6 @@
     }
     end = CACurrentMediaTime();
     printf("NSRecursiveLock:          %8.2f ms\n", (end - begin) * 1000);
-    
 }
 
 - (void)pthread_mutex_recursive:(int)count{
